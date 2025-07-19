@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/karam-smart-file-agent/static/css/main.b95b41b6.css",
+    "main.js": "/karam-smart-file-agent/static/js/main.f56fa5ed.js",
+    "static/js/453.670e15c7.chunk.js": "/karam-smart-file-agent/static/js/453.670e15c7.chunk.js",
+    "index.html": "/karam-smart-file-agent/index.html",
+    "main.b95b41b6.css.map": "/karam-smart-file-agent/static/css/main.b95b41b6.css.map",
+    "main.f56fa5ed.js.map": "/karam-smart-file-agent/static/js/main.f56fa5ed.js.map",
+    "453.670e15c7.chunk.js.map": "/karam-smart-file-agent/static/js/453.670e15c7.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b95b41b6.css",
+    "static/js/main.f56fa5ed.js"
+  ]
+}
