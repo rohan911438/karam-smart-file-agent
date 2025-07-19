@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karam Smart File Agent - Test Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(120deg, #e3f0ff, #f9f9f9);
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .file-input {
+            margin: 10px 0;
+            padding: 10px;
+            border: 2px dashed #1976d2;
+            border-radius: 8px;
+            text-align: center;
+        }
+        button {
+            background: #1976d2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #1565c0;
+        }
+        .result {
+            background: #f5f5f5;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border-left: 4px solid #4caf50;
+        }
+    </style>
+    <!-- Load our libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="./karam-client.js"></script>
+</head>
+<body>
+    <h1>🔧 Karam Smart File Agent - Test Suite</h1>
+    
+    <div class="test-section">
+        <h2>📁 ZIP File Operations</h2>
+        <div class="file-input">
+            <input type="file" id="zipFiles" multiple accept="*/*">
+            <p>Select multiple files to create a ZIP archive</p>
+        </div>
+        <button onclick="testCreateZip()">Create ZIP</button>
+        <div id="zipResult" class="result" style="display:none;"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>📂 ZIP Extraction</h2>
+        <div class="file-input">
+            <input type="file" id="extractFile" accept=".zip">
+            <p>Select a ZIP file to extract and analyze</p>
+        </div>
+        <button onclick="testExtractZip()">Extract ZIP</button>
+        <div id="extractResult" class="result" style="display:none;"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>📊 File Information</h2>
+        <div class="file-input">
+            <input type="file" id="infoFile" accept="*/*">
+            <p>Select any file to get detailed information</p>
+        </div>
+        <button onclick="testFileInfo()">Get File Info</button>
+        <div id="infoResult" class="result" style="display:none;"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>🧪 System Tests</h2>
+        <button onclick="testLibraries()">Test Libraries</button>
+        <button onclick="testDragDrop()">Test Drag & Drop</button>
+        <div id="systemResult" class="result" style="display:none;"></div>
+    </div>
+
+    <script>
+        // Test functions
+        async function testCreateZip() {
+            const files = document.getElementById('zipFiles').files;
+            if (files.length === 0) {
+                alert('Please select files first!');
+                return;
+            }
+            
+            try {
+                const result = await window.KaramFileAgent.createZip(files);
+                showResult('zipResult', `✅ ${result}`);
+            } catch (error) {
+                showResult('zipResult', `❌ Error: ${error.message}`);
+            }
+        }
+        
+        async function testExtractZip() {
+            const file = document.getElementById('extractFile').files[0];
+            if (!file) {
+                alert('Please select a ZIP file first!');
+                return;
+            }
+            
+            try {
+                const result = await window.KaramFileAgent.extractZip(file);
+                showResult('extractResult', `✅ ${result}`);
+            } catch (error) {
+                showResult('extractResult', `❌ Error: ${error.message}`);
+            }
+        }
+        
+        function testFileInfo() {
+            const file = document.getElementById('infoFile').files[0];
+            if (!file) {
+                alert('Please select a file first!');
+                return;
+            }
+            
+            try {
+                const info = window.KaramFileAgent.getFileInfo(file);
+                const result = `File: ${info.name}<br>Size: ${info.size}<br>Type: ${info.type}<br>Modified: ${info.lastModified}`;
+                showResult('infoResult', `✅ ${result}`);
+            } catch (error) {
+                showResult('infoResult', `❌ Error: ${error.message}`);
+            }
+        }
+        
+        function testLibraries() {
+            let results = [];
+            
+            if (typeof JSZip !== 'undefined') {
+                results.push('✅ JSZip library loaded');
+            } else {
+                results.push('❌ JSZip library not found');
+            }
+            
+            if (typeof window.KaramFileAgent !== 'undefined') {
+                results.push('✅ Karam File Agent loaded');
+            } else {
+                results.push('❌ Karam File Agent not found');
+            }
+            
+            showResult('systemResult', results.join('<br>'));
+        }
+        
+        function testDragDrop() {
+            showResult('systemResult', '📁 Try dragging and dropping files anywhere on this page and check the console!');
+        }
+        
+        function showResult(elementId, message) {
+            const element = document.getElementById(elementId);
+            element.innerHTML = message;
+            element.style.display = 'block';
+        }
+        
+        // Initialize on load
+        window.addEventListener('load', function() {
+            console.log('Test page loaded successfully!');
+            testLibraries();
+        });
+    </script>
+</body>
+</html>

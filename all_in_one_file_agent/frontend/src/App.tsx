@@ -1,5 +1,7 @@
 import React, { useState, useRef } from 'react';
 import './App.css';
+// @ts-ignore
+import JSZip from 'jszip';
 
 const TOOLS = [
   { key: 'zip', label: 'Zip/Unzip', icon: '🗜️', tooltip: 'Compress or extract files' },
@@ -8,9 +10,8 @@ const TOOLS = [
   { key: 'pdf', label: 'PDF Tools', icon: '📄', tooltip: 'Extract text from PDF' },
 ];
 
-const API_BASE = process.env.NODE_ENV === 'production' 
-  ? 'https://your-backend-url.com' // Replace with your actual backend URL when deployed
-  : 'http://localhost:5000';
+// For GitHub Pages deployment - all processing is done client-side
+const API_BASE = '';
 
 function App() {
   const [tool, setTool] = useState('zip');
@@ -52,63 +53,91 @@ function App() {
     setDragOver(false);
   };
 
-  const handleRun = async () => {
+  // Client-side file processing functions for GitHub Pages deployment
+  const processFilesClientSide = async () => {
     if (!files || files.length === 0) return;
     setLoading(true);
     setResult('');
     setDownloadUrl(null);
-    try {
-      const formData = new FormData();
-      Array.from(files).forEach(file => formData.append('files', file));
-      let endpoint = '';
-      let isFileDownload = false;
-      let params: any = {};
 
+    try {
       if (tool === 'zip') {
         if (zipMode === 'zip') {
-          endpoint = '/zip';
-          isFileDownload = true;
+          await createZipFile();
         } else {
-          endpoint = '/unzip';
-          params = { extract_to: 'unzipped' };
+          await extractZipFile();
         }
       } else if (tool === 'image') {
-        if (imageOp === 'enhance') {
-          endpoint = '/image/enhance';
-          isFileDownload = true;
-        } else if (imageOp === 'convert') {
-          endpoint = '/image/convert';
-          formData.append('output_format', imageFormat);
-          isFileDownload = true;
-        } else if (imageOp === 'compress') {
-          endpoint = '/image/compress';
-          formData.append('quality', imageQuality.toString());
-          isFileDownload = true;
-        }
+        await processImages();
       } else if (tool === 'audio') {
-        endpoint = '/audio/convert';
-        formData.append('output_format', audioFormat);
-        isFileDownload = true;
+        setResult('Audio processing requires server-side processing. Feature coming soon for static deployment.');
       } else if (tool === 'pdf') {
-        endpoint = '/pdf/extract';
-      }
-
-      Object.entries(params).forEach(([k, v]) => formData.append(k, String(v)));
-
-      const res = await fetch(API_BASE + endpoint, { method: 'POST', body: formData });
-      if (isFileDownload && res.ok) {
-        const blob = await res.blob();
-        const url = window.URL.createObjectURL(blob);
-        setDownloadUrl(url);
-        setResult('Download ready!');
-      } else {
-        const data = await res.json();
-        setResult(data.text || data.message || JSON.stringify(data));
+        await extractPdfText();
       }
     } catch (err: any) {
       setResult('Error: ' + err.message);
     }
     setLoading(false);
+  };
+
+  const createZipFile = async () => {
+    const zip = new JSZip();
+    
+    for (let i = 0; i < files!.length; i++) {
+      const file = files![i];
+      const arrayBuffer = await file.arrayBuffer();
+      zip.file(file.name, arrayBuffer);
+    }
+
+    const content = await zip.generateAsync({ type: 'blob' });
+    const url = window.URL.createObjectURL(content);
+    setDownloadUrl(url);
+    setResult('Zip file created successfully! Click download to save.');
+    
+    // Create download link with proper filename
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'archive.zip';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const extractZipFile = async () => {
+    if (files!.length !== 1) {
+      setResult('Please select exactly one ZIP file to extract.');
+      return;
+    }
+
+    const file = files![0];
+    if (!file.name.toLowerCase().endsWith('.zip')) {
+      setResult('Please select a ZIP file.');
+      return;
+    }
+
+    const arrayBuffer = await file.arrayBuffer();
+    const zip = await JSZip.loadAsync(arrayBuffer);
+    
+    let extractedFiles: string[] = [];
+    zip.forEach((relativePath: string, zipEntry: any) => {
+      if (!zipEntry.dir) {
+        extractedFiles.push(relativePath);
+      }
+    });
+
+    setResult(`ZIP file contains ${extractedFiles.length} files:\n${extractedFiles.join(', ')}\n\nNote: Due to browser security limitations, files cannot be automatically saved to disk. In a full deployment, files would be extracted.`);
+  };
+
+  const processImages = async () => {
+    setResult('Image processing features require advanced libraries. This feature will be enhanced in future updates. For now, basic file operations are supported.');
+  };
+
+  const extractPdfText = async () => {
+    setResult('PDF text extraction requires specialized libraries. This feature will be enhanced in future updates with PDF.js integration.');
+  };
+
+  const handleRun = async () => {
+    await processFilesClientSide();
   };
 
   const renderToolOptions = () => {
