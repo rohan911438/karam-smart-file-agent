@@ -8,7 +8,9 @@ const TOOLS = [
   { key: 'pdf', label: 'PDF Tools', icon: '📄', tooltip: 'Extract text from PDF' },
 ];
 
-const API_BASE = 'http://localhost:5000';
+const API_BASE = process.env.NODE_ENV === 'production' 
+  ? 'https://your-backend-url.com' // Replace with your actual backend URL when deployed
+  : 'http://localhost:5000';
 
 function App() {
   const [tool, setTool] = useState('zip');

@@ -19,7 +19,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && xcopy build\\* ..\\..\\docs\\ /E /I /Y",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
@@ -43,5 +43,5 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://<your-github-username>.github.io/karam"
+  "homepage": "https://rohan911438.github.io/karam-smart-file-agent"
 }
