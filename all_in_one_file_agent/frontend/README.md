@@ -1,5 +1,3 @@
-![Karam Logo](logo-7833524_1280.webp)
-
 # Karam: All-in-One Smart File Utility Agent
 
 ## Overview
@@ -13,7 +11,7 @@ Karam is a unified, AI-enabled automation agent for all your file-related tasks.
 - **Modern UI**: Responsive, drag-and-drop, tooltips, and file previews.
 
 ## Demo
-![Karam UI Screenshot](all_in_one_file_agent/frontend/screenshot.png)
+![Karam UI Screenshot](screenshot.png)
 
 ## Requirements
 - Node.js (v16+ recommended)
@@ -26,7 +24,7 @@ Karam is a unified, AI-enabled automation agent for all your file-related tasks.
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/rohan911438/karam.git
+git clone https://github.com/<your-github-username>/karam.git
 cd karam/all_in_one_file_agent/frontend
 ```
 
@@ -59,16 +57,16 @@ npm run build
   ```
 
 ## Backend (API)
-The backend is a Flask app (Python) that powers all file utilities. See `all_in_one_file_agent/web/app.py` for endpoints.
+The backend is a Flask app (Python) that powers all file utilities. See `../web/app.py` for endpoints.
 
 ### Requirements
 - Install Python dependencies:
   ```bash
-  pip install -r all_in_one_file_agent/requirements.txt
+  pip install -r ../requirements.txt
   ```
 - Run the backend:
   ```bash
-  cd all_in_one_file_agent/web
+  cd ../web
   python app.py
   ```
 
@@ -83,17 +81,6 @@ karam/
     main.py
 ```
 
-## .gitignore
-Add a `.gitignore` file at the root with at least:
-```
-node_modules/
-build/
-.env
-__pycache__/
-*.pyc
-.DS_Store
-```
-
 ## Contributing
 Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
 
@@ -101,4 +88,4 @@ Pull requests are welcome! For major changes, please open an issue first to disc
 [MIT](LICENSE)
 
 ---
-**Author:** Rohan kumar
+**Author:** [Your Name]

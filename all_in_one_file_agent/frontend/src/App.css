@@ -1,0 +1,134 @@
+body {
+  background: linear-gradient(120deg, #e3f0ff 0%, #f9f9f9 100%);
+  min-height: 100vh;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+.App {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 32px 20px 24px 20px;
+  border-radius: 18px;
+  box-shadow: 0 4px 32px rgba(25, 118, 210, 0.10);
+  background: #fff;
+  position: relative;
+}
+.tool-tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+.tool-tab {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 16px;
+  padding: 10px 22px;
+  border-radius: 8px;
+  background: #e3eafc;
+  color: #1976d2;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s;
+}
+.tool-tab.selected {
+  background: #1976d2;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(25,118,210,0.10);
+}
+.upload-area {
+  border: 2px dashed #b3c6e6;
+  border-radius: 10px;
+  padding: 24px 0 12px 0;
+  text-align: center;
+  margin-bottom: 12px;
+  background: #f6faff;
+  transition: border-color 0.2s;
+}
+.upload-area.dragover {
+  border-color: #1976d2;
+  background: #e3f0ff;
+}
+.upload-area input[type="file"] {
+  display: none;
+}
+.upload-label {
+  color: #1976d2;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 15px;
+}
+.file-preview {
+  margin: 10px auto 0 auto;
+  text-align: center;
+}
+.file-preview img {
+  max-width: 140px;
+  max-height: 90px;
+  border-radius: 8px;
+  margin: 0 auto;
+  display: block;
+  box-shadow: 0 2px 8px rgba(25,118,210,0.08);
+}
+.action-btn {
+  padding: 10px 32px;
+  border-radius: 8px;
+  font-size: 17px;
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 10px;
+  transition: background 0.2s;
+}
+.action-btn:disabled {
+  background: #b3c6e6;
+  cursor: not-allowed;
+}
+.result-box {
+  background: #f1f8e9;
+  padding: 14px;
+  border-radius: 8px;
+  text-align: center;
+  margin: 12px 0 8px 0;
+  font-size: 15px;
+  color: #2e7d32;
+  word-break: break-all;
+}
+.download-link {
+  color: #388e3c;
+  font-weight: 600;
+  font-size: 16px;
+  text-decoration: underline;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+.spinner {
+  border: 4px solid #e3eafc;
+  border-top: 4px solid #1976d2;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  animation: spin 1s linear infinite;
+  margin: 18px auto;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@media (max-width: 600px) {
+  .App {
+    max-width: 98vw;
+    padding: 12px 2vw 16px 2vw;
+  }
+  .tool-tabs {
+    flex-direction: column;
+    gap: 6px;
+  }
+  .tool-tab {
+    width: 100%;
+    justify-content: center;
+  }
+}

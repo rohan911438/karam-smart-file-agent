@@ -1,0 +1,16 @@
+# Karam Backend Requirements
+# Install with: pip install -r requirements.txt
+
+flask
+pillow
+opencv-python
+pydub
+ffmpeg-python
+pdfplumber
+python-docx
+py7zr
+rarfile
+schedule
+transformers
+torch
+reportlab 

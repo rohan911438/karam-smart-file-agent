@@ -1,0 +1,21 @@
+# Node
+node_modules/
+build/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+.env
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# Misc
+*.swp
+*.swo 
