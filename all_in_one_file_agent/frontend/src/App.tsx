@@ -8,7 +8,7 @@ const TOOLS = [
   { key: 'pdf', label: 'PDF Tools', icon: '📄', tooltip: 'Extract text from PDF' },
 ];
 
-const API_BASE = 'http://localhost:3000';
+const API_BASE = 'http://localhost:5000';
 
 function App() {
   const [tool, setTool] = useState('zip');

@@ -1,0 +1,16 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Start Flask Backend",
+			"type": "shell",
+			"command": "C:/Users/ABHINAV KUMAR/AppData/Local/Programs/Python/Python310/python.exe",
+			"args": [
+				"web/app.py"
+			],
+			"group": "build",
+			"isBackground": true,
+			"problemMatcher": []
+		}
+	]
+}

@@ -1,14 +1,16 @@
 import sys
 import os
 import tempfile
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from flask import Flask, request, jsonify, send_file, send_from_directory
+from flask_cors import CORS
 from utils.zipper import zip_files, unzip_file
 from utils.image_tools import enhance_image, convert_image_format, compress_image
 from utils.audio_tools import convert_audio_format
 from utils.pdf_tools import extract_text_from_pdf
 
 app = Flask(__name__, static_folder='../frontend/build', static_url_path='/')
+CORS(app)  # Enable CORS for all routes
 UPLOAD_DIR = tempfile.gettempdir()
 
 @app.route('/')
@@ -97,4 +99,4 @@ def pdf_extract_endpoint():
     return jsonify({'text': text})
 
 if __name__ == '__main__':
-    app.run(debug=True, port=3000) 
+    app.run(debug=True, port=5000) 
