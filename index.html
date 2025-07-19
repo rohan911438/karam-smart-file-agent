@@ -4,13 +4,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Karam - All-in-One Smart File Utility Agent</title>
-    <script>
-        // Redirect to the React app
-        window.location.href = './all_in_one_file_agent/frontend/build/index.html';
-    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(120deg, #e3f0ff, #f9f9f9);
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .btn {
+            display: inline-block;
+            background: #1976d2;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background: #1565c0;
+        }
+    </style>
 </head>
 <body>
-    <p>Redirecting to Karam App...</p>
-    <p>If you're not redirected automatically, <a href="./all_in_one_file_agent/frontend/build/index.html">click here</a>.</p>
+    <div class="container">
+        <h1>🔧 Karam - All-in-One Smart File Utility Agent</h1>
+        <p>Welcome to your smart file processing tool!</p>
+        
+        <p><strong>Choose your access method:</strong></p>
+        
+        <a href="./docs/index.html" class="btn">🚀 Launch Main App</a>
+        <a href="./test-page.html" class="btn">🧪 Test Functionality</a>
+        
+        <hr style="margin: 30px 0;">
+        
+        <h3>📱 Direct Links:</h3>
+        <p>Main App: <a href="./docs/">./docs/</a></p>
+        <p>Test Page: <a href="./test-page.html">./test-page.html</a></p>
+        
+        <hr style="margin: 30px 0;">
+        
+        <h3>🔧 Features:</h3>
+        <ul style="text-align: left; display: inline-block;">
+            <li>✅ ZIP file creation and extraction</li>
+            <li>✅ File information display</li>
+            <li>✅ Drag and drop support</li>
+            <li>✅ Client-side processing (no server needed)</li>
+            <li>🔧 PDF processing (coming soon)</li>
+            <li>🔧 Image tools (coming soon)</li>
+        </ul>
+        
+        <p><small>Deployed on GitHub Pages | Repository: karam-smart-file-agent</small></p>
+    </div>
+
+    <script>
+        // Auto-redirect after 3 seconds if user doesn't click
+        setTimeout(function() {
+            console.log('Auto-redirecting to main app...');
+            window.location.href = './docs/index.html';
+        }, 5000);
+        
+        console.log('Karam Smart File Agent - Landing Page');
+        console.log('Main app location: ./docs/index.html');
+    </script>
 </body>
 </html>
